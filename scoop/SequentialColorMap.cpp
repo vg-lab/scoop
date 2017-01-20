@@ -104,8 +104,8 @@ namespace scoop
     // Case of interpolation
     {
       // Find nearest values
-      float nearestSmallerValue;
-      float nearestGreaterValue;
+      float nearestSmallerValue = 0.;
+      float nearestGreaterValue = 0.;
       auto previousValue = _valuesToColors.begin( )->first;
       for ( const auto& valueColorPair : _valuesToColors )
       {

@@ -36,7 +36,7 @@ namespace scoop
 
   unsigned int ColorPalette::size( void )
   {
-    return _colors.size( );
+    return ( unsigned int ) _colors.size( );
   }
 
   const char* cbBuGn[][9] =

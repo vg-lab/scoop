@@ -24,6 +24,7 @@
 
 #include "Color.h"
 #include "ColorPalette.h"
+#include <scoop/api.h>
 #include <vector>
 #include <map>
 
@@ -32,19 +33,21 @@ namespace scoop
   class SequentialColorMap
   {
   public:
+    SCOOP_API
     SequentialColorMap( float minValue_ = 0.f,
                         const Color& minColor = Color( 0, 0, 0 ),
                         float maxValue_ = 1.f,
                         const Color& maxColor = Color( 255, 255, 255 ));
+    SCOOP_API
     SequentialColorMap( std::vector< float > values,
                         ColorPalette palette );
 
-    void setMinValue( const float minValue_ );
-    void setMaxValue( const float maxValue_ );
-    float minValue( void );
-    float maxValue( void );
-    void addColor( const float value, const Color& color );
-    Color getColor( const float value ) const;
+    SCOOP_API void setMinValue( const float minValue_ );
+    SCOOP_API void setMaxValue( const float maxValue_ );
+    SCOOP_API float minValue( void );
+    SCOOP_API float maxValue( void );
+    SCOOP_API void addColor( const float value, const Color& color );
+    SCOOP_API Color getColor( const float value ) const;
 
   protected:
 

@@ -23,6 +23,8 @@
 #define __SCOOP__COLOR_PALETTE__
 
 #include "Color.h"
+#include <scoop/api.h>
+#include <vector>
 
 namespace scoop
 {
@@ -37,10 +39,10 @@ namespace scoop
       BuPu
     } ColorBrewerSequential;
 
-    const Colors& colors( void ) const;
-    Colors& colors( void );
-    unsigned int size( void );
-    static ColorPalette colorBrewerSequential(
+    SCOOP_API const Colors& colors( void ) const;
+    SCOOP_API Colors& colors( void );
+    SCOOP_API unsigned int size( void );
+    SCOOP_API static ColorPalette colorBrewerSequential(
       ColorBrewerSequential cbPalette = ColorBrewerSequential::BuGn,
       unsigned int size = 3 );
 
