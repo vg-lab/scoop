@@ -33,18 +33,39 @@ namespace scoop
   public:
 
     typedef std::vector< Color > Colors;
+
     typedef enum
     {
-      BuGn,
-      BuPu
+      BuGn = 0, BuPu, GnBu, OrRd, PuBu, PuBuGn,
+      PuRd, RdPu, YlGn, YlGnBu, YlOrBr, YlOrRd,
+      Blues, Greens, Greys, Oranges, Purples, Reds
     } ColorBrewerSequential;
+
+    typedef enum
+    {
+      BrBG, PiYG, PRGn, PurOr,
+      RdBu, RdGy, RdYlBu, RdYlGn, Spectral
+    } ColorBrewerDiverging;
+
+    typedef enum
+    {
+      Accent, Dark2, Paired, Pastel1,
+      Pastel2, Set1, Set2, Set3,
+    } ColorBrewerQualitative;
 
     SCOOP_API const Colors& colors( void ) const;
     SCOOP_API Colors& colors( void );
     SCOOP_API unsigned int size( void );
+
     SCOOP_API static ColorPalette colorBrewerSequential(
       ColorBrewerSequential cbPalette = ColorBrewerSequential::BuGn,
-      unsigned int size = 3 );
+      unsigned int size = 3, bool reverse = true );
+    SCOOP_API static ColorPalette colorBrewerDiverging(
+      ColorBrewerDiverging cbPalette = ColorBrewerDiverging::BrBG,
+      unsigned int size = 3, bool reverse = true );
+    SCOOP_API static ColorPalette colorBrewerQualitative(
+      ColorBrewerQualitative cbPalette = ColorBrewerQualitative::Accent,
+      unsigned int size = 3, bool reverse = false );
 
     protected:
     std::vector< Color > _colors;
