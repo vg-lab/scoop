@@ -55,7 +55,7 @@ namespace scoop
 
     SCOOP_API const Colors& colors( void ) const;
     SCOOP_API Colors& colors( void );
-    SCOOP_API unsigned int size( void );
+    SCOOP_API unsigned int size( void ) const;
 
     SCOOP_API static ColorPalette colorBrewerSequential(
       ColorBrewerSequential cbPalette = ColorBrewerSequential::BuGn,

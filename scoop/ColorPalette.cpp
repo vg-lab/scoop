@@ -35,7 +35,7 @@ namespace scoop
     return _colors;
   };
 
-  unsigned int ColorPalette::size( void )
+  unsigned int ColorPalette::size( void ) const
   {
     return ( unsigned int ) _colors.size( );
   }
@@ -53,8 +53,9 @@ namespace scoop
     auto& colors = palette.colors( );
     colors.reserve( size );
     for ( unsigned int i = 0; i < size; ++i )
+    {
       colors.push_back( Color( stringifiedPalette[size-3][i] ));
-
+    }
     if ( reverse )
       std::reverse( colors.begin( ), colors.end( ));
 

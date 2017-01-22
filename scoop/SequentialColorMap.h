@@ -33,29 +33,45 @@ namespace scoop
   class SequentialColorMap
   {
   public:
+
+    typedef enum
+    {
+      RGB_INTERPOLATION = 0,
+      HSV_INTERPOLATION
+    } ColorInterpolation;
+
     SCOOP_API
     SequentialColorMap( float minValue_ = 0.f,
                         const Color& minColor = Color( 0, 0, 0 ),
                         float maxValue_ = 1.f,
                         const Color& maxColor = Color( 255, 255, 255 ));
     SCOOP_API
-    SequentialColorMap( std::vector< float > values,
-                        ColorPalette palette );
+    SequentialColorMap( const std::vector< float >& values,
+                        const ColorPalette& palette );
+    SCOOP_API
+    SequentialColorMap( const ColorPalette& palette,
+                        float minValue_ = 0.f, float maxValue = 1.f );
 
-    SCOOP_API void setMinValue( const float minValue_ );
-    SCOOP_API void setMaxValue( const float maxValue_ );
-    SCOOP_API float minValue( void );
-    SCOOP_API float maxValue( void );
+    SCOOP_API void setFromPalette( const std::vector< float >& values,
+                                   const ColorPalette& palette );
+
+    SCOOP_API float minValue( void ) const;
+    SCOOP_API float maxValue( void ) const;
     SCOOP_API void addColor( const float value, const Color& color );
-    SCOOP_API Color getColor( const float value ) const;
+    SCOOP_API Color getColor(
+      const float value,
+      const ColorInterpolation interpolation = RGB_INTERPOLATION ) const;
 
   protected:
 
+    Color _rgbInterpolation( const Color& color1,
+                             const Color& color2,
+                             float normDist ) const;
     Color _hsvInterpolation( const Color& color1,
                              const Color& color2,
                              float normDist ) const;
-    float _minValue;
-    float _maxValue;
+    // float _minValue;
+    // float _maxValue;
     std::map< float, Color > _valuesToColors;
   };
 
