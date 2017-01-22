@@ -23,6 +23,7 @@
 #include <cmath>
 #include <map>
 #include <stdexcept>
+#include <iostream>
 
 namespace scoop
 {
@@ -30,49 +31,50 @@ namespace scoop
                                           const Color& minColor,
                                           float maxValue_,
                                           const Color& maxColor )
-    : _minValue( minValue_ )
-    , _maxValue( maxValue_ )
   {
     _valuesToColors[ minValue_ ] = minColor;
     _valuesToColors[ maxValue_ ] = maxColor;
   }
 
-  SequentialColorMap::SequentialColorMap( std::vector< float > values,
-                                          ColorPalette palette )
+  SequentialColorMap::SequentialColorMap( const std::vector< float >& values,
+                                          const ColorPalette& palette )
+  {
+    this->setFromPalette( values, palette );
+  }
+
+  SequentialColorMap::SequentialColorMap(
+    const ColorPalette& palette,
+    float minValue_ , float maxValue_ )
+  {
+    std::vector< float > values;
+    values.reserve( palette.size( ));
+    auto delta = ( maxValue_ - minValue_ ) / palette.size( );
+    for ( unsigned int i = 0; i < palette.size( ); ++i )
+      values.push_back( minValue_ + i * delta );
+    this->setFromPalette( values, palette );
+  }
+
+  float SequentialColorMap::minValue( void ) const
+  {
+    return _valuesToColors.begin( )->first;
+  }
+
+  float SequentialColorMap::maxValue( void ) const
+  {
+    return _valuesToColors.rbegin( )->first;
+  }
+
+  void SequentialColorMap::setFromPalette( const std::vector< float >& values,
+                                           const ColorPalette& palette )
   {
     if ( values.size( ) != palette.size( ))
       throw std::runtime_error( "Palette and values sizes do not match" );
     if ( values.size( ) < 2 )
       throw std::runtime_error( "Provide at least 2 values" );
 
-    // Assuming values are sorted
-    _minValue = values[0];
-    _maxValue = values[values.size( )-1];
-
     const auto& colors = palette.colors( );
     for ( unsigned int i = 0; i < values.size( ); ++i )
       addColor( values[i], colors[i] );
-
-  }
-
-  void SequentialColorMap::setMinValue( const float minValue_ )
-  {
-    _minValue = minValue_;
-  }
-
-  void SequentialColorMap::setMaxValue( const float maxValue_ )
-  {
-    _maxValue = maxValue_;
-  }
-
-  float SequentialColorMap::minValue( void )
-  {
-    return _minValue;
-  }
-
-  float SequentialColorMap::maxValue( void )
-  {
-    return _maxValue;
   }
 
   void SequentialColorMap::addColor( const float value, const Color& color )
@@ -80,17 +82,20 @@ namespace scoop
     _valuesToColors[ value ] = color;
   }
 
-  Color SequentialColorMap::getColor( const float value ) const
+  Color SequentialColorMap::getColor(
+    const float value,
+    const ColorInterpolation interpolation ) const
   {
     if ( _valuesToColors.size( ) < 2 )
       throw( std::runtime_error( "SequentialColorMap with "
                                  "not enough values" ));
-    // Case with value outside range
-    if ( value < _minValue )
-      return _valuesToColors.at( _minValue );
 
-    if ( value > _maxValue )
-      return _valuesToColors.at( _maxValue );
+    // Case with value outside range
+    if ( value < minValue( ))
+      return _valuesToColors.at( minValue( ));
+
+    if ( value > maxValue( ))
+      return _valuesToColors.at( maxValue( ));
 
     // Case where value exists
     {
@@ -123,12 +128,34 @@ namespace scoop
       }
 
       // Interpolate color
-      return _hsvInterpolation(
-        _valuesToColors.at( nearestSmallerValue ),
-        _valuesToColors.at( nearestGreaterValue ),
-        ( value - nearestSmallerValue ) /
-        ( nearestGreaterValue - nearestSmallerValue ));
+      if ( interpolation == RGB_INTERPOLATION )
+        return _rgbInterpolation(
+          _valuesToColors.at( nearestSmallerValue ),
+          _valuesToColors.at( nearestGreaterValue ),
+          ( value - nearestSmallerValue ) /
+          ( nearestGreaterValue - nearestSmallerValue ));
+      else if ( interpolation == HSV_INTERPOLATION )
+        return _hsvInterpolation(
+          _valuesToColors.at( nearestSmallerValue ),
+          _valuesToColors.at( nearestGreaterValue ),
+          ( value - nearestSmallerValue ) /
+          ( nearestGreaterValue - nearestSmallerValue ));
+      else
+        throw std::runtime_error( "Interpolation type unknown" );
+
+      return Color( );
     }
+  }
+
+  Color SequentialColorMap::_rgbInterpolation( const Color& color1,
+                                               const Color& color2,
+                                               float normDist ) const
+  {
+    return Color(
+      color1.red( ) + normDist * ( color2.red( ) - color1.red( )),
+      color1.green( ) + normDist * ( color2.green( ) - color1.green( )),
+      color1.blue( ) + normDist * ( color2.blue( ) - color1.blue( )),
+      color1.alpha( ) + normDist * ( color2.alpha( ) - color1.alpha( )));
   }
 
   // Based on http://www.alanzucconi.com/2016/01/06/colour-interpolation/2/
@@ -171,6 +198,7 @@ namespace scoop
                    s1 + normDist * ( s2 - s1 ),
                    v1 + normDist * ( v2 - v1 ),
                    a1 + normDist * ( a2 - a1 ));
+    std::cout << "Return " << color << std::endl;
     return color;
   }
 

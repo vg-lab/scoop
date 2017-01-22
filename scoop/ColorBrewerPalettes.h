@@ -36,7 +36,7 @@ const char* cbSequential[][9][9] =
     { "#08589e", "#2b8cbe", "#4eb3d3", "#7bccc4", "#a8ddb5", "#ccebc5",
       "#e0f3db", "#f7fcf0" },
     { "#084081", "#0868ac", "#2b8cbe", "#4eb3d3", "#7bccc4", "#a8ddb5",
-     "#ccebc5", "#e0f3db", "#f7fcf0" }
+      "#ccebc5", "#e0f3db", "#f7fcf0" }
   },
   { // OrRd
     { "#e34a33", "#fdbb84", "#fee8c8" },
@@ -208,11 +208,11 @@ const char* cbSequential[][9][9] =
       "#dadaeb", "#efedf5", "#fcfbfd" }
   },
   { // Reds
-    { "de2d26", "#fc9272", "#fee0d2" },
-    { "cb181d", "#fb6a4a", "#fcae91", "#fee5d9" },
-    { "a50f15", "#de2d26", "#fb6a4a", "#fcae91", "#fee5d9" },
-    { "a50f15", "#de2d26", "#fb6a4a", "#fc9272", "#fcbba1", "#fee5d9" },
-    { "99000d", "#cb181d", "#ef3b2c", "#fb6a4a", "#fc9272", "#fcbba1",
+    { "#de2d26", "#fc9272", "#fee0d2" },
+    { "#cb181d", "#fb6a4a", "#fcae91", "#fee5d9" },
+    { "#a50f15", "#de2d26", "#fb6a4a", "#fcae91", "#fee5d9" },
+    { "#a50f15", "#de2d26", "#fb6a4a", "#fc9272", "#fcbba1", "#fee5d9" },
+    { "#99000d", "#cb181d", "#ef3b2c", "#fb6a4a", "#fc9272", "#fcbba1",
       "#fee5d9" },
     { "99000d", "#cb181d", "#ef3b2c", "#fb6a4a", "#fc9272", "#fcbba1",
       "#fee0d2", "#fff5f0" },
