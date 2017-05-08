@@ -96,7 +96,7 @@ namespace scoop
     auto& colors = palette.colors( );
     colors.reserve( size );
     for ( unsigned int i = 0; i < size; ++i )
-      colors.push_back( Color( stringifiedPalette[size-3][i] ));
+      colors.push_back( Color( stringifiedPalette[i] ));
 
     if ( reverse )
       std::reverse( colors.begin( ), colors.end( ));
