@@ -28,12 +28,12 @@ namespace scoop
   const ColorPalette::Colors& ColorPalette::colors( void ) const
   {
     return _colors;
-  };
+  }
 
   ColorPalette::Colors& ColorPalette::colors( void )
   {
     return _colors;
-  };
+  }
 
   unsigned int ColorPalette::size( void ) const
   {

@@ -31,7 +31,6 @@ int main ( void )
 
   std::cout << "Palette size " << cp.size( ) << std::endl;
   for ( const auto& color : cp.colors ( ))
-  {
     std::cout << color << std::endl;
-  }
-}
+
+}//int main ( void )
