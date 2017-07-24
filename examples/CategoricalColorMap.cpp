@@ -43,11 +43,7 @@ int main ( void )
 
     // get color mappings
     const auto& color = categoricalColorMap.getColor( CATEGORY2 );
-    std::cout << "Color("
-              << color.red( ) << ","
-              << color.green( ) << ","
-              << color.blue( ) << ","
-              << color.alpha( ) << ")" << std::endl;
+    std::cout << color << std::endl;
   }
   {
     // creating a colormap from a palette
@@ -59,11 +55,7 @@ int main ( void )
 
     // get color mappings
     const auto& color = categoricalColorMap.getColor( CATEGORY2 );
-    std::cout << "Color("
-              << color.red( ) << ","
-              << color.green( ) << ","
-              << color.blue( ) << ","
-              << color.alpha( ) << ")" << std::endl;
+    std::cout << color << std::endl;
   }
 
   // int-based categories

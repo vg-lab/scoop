@@ -24,13 +24,22 @@
 
 #include <QColor>
 #include <ostream>
+#include <scoop/api.h>
 
 namespace scoop
 {
 
   typedef QColor Color;
-  std::ostream& operator<< ( std::ostream& os, const QColor color );
 
 } // namespace scoop
+
+/**
+ * Dump a scoop::Color object into a stream as a readable string
+ *
+ * @param[in] os : output stream
+ * @param[in] color : color to be dumped
+   @return    copy of output stream after color is dumped
+ */
+SCOOP_API std::ostream& operator<< ( std::ostream& os, const scoop::Color& color );
 
 #endif

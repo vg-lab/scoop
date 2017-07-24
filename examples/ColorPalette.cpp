@@ -22,7 +22,6 @@
 #include <scoop/scoop.h>
 #include <iostream>
 
-
 int main ( void )
 {
 
@@ -32,11 +31,6 @@ int main ( void )
 
   std::cout << "Palette size " << cp.size( ) << std::endl;
   for ( const auto& color : cp.colors ( ))
-  {
-    std::cout << "Color("
-              << color.red( ) << ","
-              << color.green( ) << ","
-              << color.blue( ) << ","
-              << color.alpha( ) << ")" << std::endl;
-  }
-}
+    std::cout << color << std::endl;
+
+}//int main ( void )

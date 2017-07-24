@@ -1,9 +1,6 @@
 #include "Color.h"
 
-namespace scoop
-{
-
-  std::ostream& operator<< ( std::ostream& os, const QColor color )
+  std::ostream& operator<< ( std::ostream& os, const scoop::Color& color )
   {
     os << "Color("
        << color.red( ) << ","
@@ -12,5 +9,3 @@ namespace scoop
        << color.alpha( ) << ")";
     return os;
   }
-
-} // namespace scoop
