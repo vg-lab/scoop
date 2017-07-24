@@ -29,8 +29,10 @@ namespace scoop
 {
 
   typedef QColor Color;
-  std::ostream& operator<< ( std::ostream& os, const QColor color );
 
 } // namespace scoop
+
+//Define "::operator<<" out of the scoop namespace
+std::ostream& operator<< ( std::ostream& os, const scoop::Color &color );
 
 #endif
