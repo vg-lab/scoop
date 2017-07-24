@@ -1,6 +1,6 @@
 #include "Color.h"
 
-  std::ostream& operator<< ( std::ostream& os, const scoop::Color &color )
+  std::ostream& operator<< ( std::ostream& os, const scoop::Color& color )
   {
     os << "Color("
        << color.red( ) << ","

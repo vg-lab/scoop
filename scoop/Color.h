@@ -24,6 +24,7 @@
 
 #include <QColor>
 #include <ostream>
+#include <scoop/api.h>
 
 namespace scoop
 {
@@ -32,7 +33,13 @@ namespace scoop
 
 } // namespace scoop
 
-//Define "::operator<<" out of the scoop namespace
-std::ostream& operator<< ( std::ostream& os, const scoop::Color &color );
+/**
+ * Dump a scoop::Color object into a stream as a readable string
+ *
+ * @param[in] os : output stream
+ * @param[in] color : color to be dumped
+   @return    copy of output stream after color is dumped
+ */
+SCOOP_API std::ostream& operator<< ( std::ostream& os, const scoop::Color& color );
 
 #endif
