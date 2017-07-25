@@ -1,5 +1,5 @@
 cmake_minimum_required( VERSION 3.1 FATAL_ERROR )
-project( scoop VERSION 0.1.2 )
+project( scoop VERSION 0.1.3 )
 set( scoop_VERSION_ABI 2)
 
 # Disable in source building
@@ -11,6 +11,10 @@ list( APPEND CMAKE_MODULE_PATH
   ${PROJECT_SOURCE_DIR}/CMake
   ${CMAKE_SOURCE_DIR}/CMake/common )
 
+if(NOT EXISTS ${CMAKE_SOURCE_DIR}/CMake/common/Common.cmake)
+  message(FATAL_ERROR "CMake/common missing, run: git submodule update --init")
+endif()
+
 # Default build type is Debug
 if( NOT CMAKE_BUILD_TYPE )
   set( CMAKE_BUILD_TYPE Debug )
@@ -19,8 +23,6 @@ endif( NOT CMAKE_BUILD_TYPE )
 if ( CMAKE_BUILD_TYPE MATCHES "Debug" )
   add_definitions( -DDEBUG )
 endif( )
-
-include(GitExternal)
 
 set( SCOOP_DESCRIPTION "Scoop - ColoR pAleTtes and mappERs" )
 set( COMMON_PROJECT_DOMAIN gmrv.es )

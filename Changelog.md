@@ -1,6 +1,7 @@
 # scoop
 
 ## git master
+* [!6] Bump CMake/common and use it as a submodule
 * [!5] Define operator<<(scoop::Color &color) out of scoop namespace
 * [!4] Fix bug in qualitative color palettes creation
 * [!3] Added sequential color map construction from palette and two boundary values.
