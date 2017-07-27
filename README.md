@@ -22,5 +22,6 @@ enough to build it just with the required dependencies.
 ```bash
 git clone https://gitlab.gmrv.es/gmrv/scoop.git
 mkdir scoop/build && cd scoop/build
+git submodule update --init
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make
