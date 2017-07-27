@@ -20,7 +20,7 @@ Yosemite and Windows 7/8 Visual Studio 2013 Win64. The following steps should be
 enough to build it just with the required dependencies.
 
 ```bash
-git clone https://gitlab.gmrv.es/gmrv/scoop.git
+git clone --recursive https://gitlab.gmrv.es/gmrv/scoop.git
 mkdir scoop/build && cd scoop/build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make
