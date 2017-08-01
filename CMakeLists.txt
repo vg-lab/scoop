@@ -1,5 +1,5 @@
 cmake_minimum_required( VERSION 3.1 FATAL_ERROR )
-project( scoop VERSION 0.1.3 )
+project( scoop VERSION 0.1.4 )
 set( scoop_VERSION_ABI 2)
 
 # Disable in source building
