@@ -29,6 +29,7 @@
 namespace scoop
 {
 
+  //! Scoop base color type is QColor
   typedef QColor Color;
 
 } // namespace scoop

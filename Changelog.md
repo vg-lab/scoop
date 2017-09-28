@@ -1,6 +1,8 @@
 # scoop
 
 ## git master
+* [!10] Added Doxygen documentation
+* [!9] Moved CI to OSX Sierra
 * [!8] Fixed bug in PuBu ColorBrewer palette.
 * [!7] Updated README.md
 * [!6] Bump CMake/common and use it as a submodule
