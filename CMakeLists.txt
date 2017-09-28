@@ -41,4 +41,8 @@ add_subdirectory( examples )
 # add_subdirectory( tests )
 
 include( CPackConfig )
+
+
+set( DOXYGEN_MAINPAGE_MD README.md )
+set( DOXYGEN_EXTRA_INPUT ${PROJECT_SOURCE_DIR}/README.md )
 include( DoxygenRule )

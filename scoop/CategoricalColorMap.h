@@ -29,26 +29,68 @@
 
 namespace scoop
 {
+  /** Class for categorical color maps
+   *
+   *  This class allows to define a categorical color mapper. It provides the
+   *  methods needed to establish the relationship between categories and the
+   *  associated colors. This class is template because it can be use for
+   *  different types of categories
+   */
   template< class Category = int,
             class Hash = std::hash< int >>
   class CategoricalColorMap
   {
   public:
-    CategoricalColorMap( void ) {};
-    CategoricalColorMap( std::vector< Category > categories,
-                         ColorPalette palette );
 
+    /**
+     * Default constructor. Creates an empty color mapper
+     *
+     */
+    CategoricalColorMap( void ) {};
+
+    /**
+     * Constructorbased on a vector of categories and a color palette. This size
+     * of the provided categories and the palette has to be the same, otherwise
+     * an exception will be raised.
+     *
+     * @param[in] categories: input categories
+     * @param[in] palette: input palette
+     *
+     */
+    CategoricalColorMap( const std::vector< Category >& categories,
+                         const ColorPalette& palette );
+
+    /**
+     * Set a color for a category
+     *
+     * @param[in] category: category which will be associated
+     * @param[in] color: color to be associated to the category
+     *
+     */
     void setColor( const Category& category, const Color& color );
+
+    /**
+     * Get a color for a category
+     *
+     * @param[in] category: input category
+     *
+     */
     const Color& getColor( const Category& category ) const;
 
   protected:
+
+    //! Container that associates each category to a color
     std::unordered_map< Category, Color, Hash > _categoriesToColors;
   };
 
+
+  //// Impl ////
+
+
   template< class Category, class Hash  >
   CategoricalColorMap< Category, Hash >::CategoricalColorMap(
-    std::vector< Category> categories,
-    ColorPalette palette )
+    const std::vector< Category>& categories,
+    const ColorPalette& palette )
   {
     if ( categories.size( ) != palette.size( ))
       throw std::runtime_error( "Palette and categories sizes do not match" );

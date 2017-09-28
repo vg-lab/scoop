@@ -67,6 +67,8 @@ namespace scoop
   void SequentialColorMap::setFromPalette( const std::vector< float >& values,
                                            const ColorPalette& palette )
   {
+    _valuesToColors.clear( );
+
     if ( values.size( ) != palette.size( ))
       throw std::runtime_error( "Palette and values sizes do not match" );
     if ( values.size( ) < 2 )
