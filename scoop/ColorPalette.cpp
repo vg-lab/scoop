@@ -88,7 +88,7 @@ namespace scoop
     unsigned int size,
     bool reverse )
   {
-    if ( size > cbQualitativeSizes[cbPalette] || size < 3 )
+    if ( size > cbQualitativeSizes[cbPalette] || size == 0 )
       throw std::runtime_error( "Palette size invalid" );
 
     ColorPalette palette;

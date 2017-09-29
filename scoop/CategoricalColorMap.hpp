@@ -85,8 +85,6 @@ namespace scoop
 
 
   //// Impl ////
-
-
   template< class Category, class Hash  >
   CategoricalColorMap< Category, Hash >::CategoricalColorMap(
     const std::vector< Category>& categories,
