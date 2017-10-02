@@ -48,7 +48,7 @@ namespace scoop
   {
     std::vector< float > values;
     values.reserve( palette.size( ));
-    auto delta = ( maxValue_ - minValue_ ) / palette.size( );
+    auto delta = ( maxValue_ - minValue_ ) / ( palette.size( ) - 1 );
     for ( unsigned int i = 0; i < palette.size( ); ++i )
       values.push_back( minValue_ + i * delta );
     this->setFromPalette( values, palette );
@@ -67,12 +67,12 @@ namespace scoop
   void SequentialColorMap::setFromPalette( const std::vector< float >& values,
                                            const ColorPalette& palette )
   {
-    _valuesToColors.clear( );
-
     if ( values.size( ) != palette.size( ))
       throw std::runtime_error( "Palette and values sizes do not match" );
     if ( values.size( ) < 2 )
-      throw std::runtime_error( "Provide at least 2 values" );
+      throw std::runtime_error( "Less than two values provided" );
+
+    _valuesToColors.clear( );
 
     const auto& colors = palette.colors( );
     for ( unsigned int i = 0; i < values.size( ); ++i )
@@ -88,9 +88,6 @@ namespace scoop
     const float value,
     const ColorInterpolation interpolation ) const
   {
-    if ( _valuesToColors.size( ) < 2 )
-      throw( std::runtime_error( "SequentialColorMap with "
-                                 "not enough values" ));
 
     // Case with value outside range
     if ( value < minValue( ))
@@ -165,8 +162,6 @@ namespace scoop
                                                const Color& color2,
                                                float normDist ) const
   {
-    if ( normDist > 1.f && normDist < 0.f )
-      throw( std::runtime_error( "normDist outside [0,1] range" ));
 
     double h1, s1, v1, a1;
     double h2, s2, v2, a2;
@@ -200,7 +195,6 @@ namespace scoop
                    s1 + normDist * ( s2 - s1 ),
                    v1 + normDist * ( v2 - v1 ),
                    a1 + normDist * ( a2 - a1 ));
-    std::cout << "Return " << color << std::endl;
     return color;
   }
 

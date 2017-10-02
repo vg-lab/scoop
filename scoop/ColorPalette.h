@@ -113,7 +113,7 @@ namespace scoop
      * palettes
      *
      * @param[in] cbPalette: the name of the ColorBrewer's qualitative pelette
-     * @param[in] size: the size of the palette. Size must be 3 or greater and
+     * @param[in] size: the size of the palette. Size must be at least 1 and
      *                  lower than the number of colors available for the palette
      *                  chosen.
      * @param[in] reverse: if the palette is created backwards

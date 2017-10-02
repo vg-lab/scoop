@@ -3,7 +3,7 @@ source_group(\\ FILES CMakeLists.txt)
 set(SCOOP_PUBLIC_HEADERS
   Color.h
   ColorPalette.h
-  CategoricalColorMap.h
+  CategoricalColorMap.hpp
   SequentialColorMap.h
 )
 

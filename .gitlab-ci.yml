@@ -8,6 +8,7 @@ Ubuntu-Subproject:
   - hostname
   - uname -a
   - export BUILD_GENERATOR="Ninja";
+  - export CMAKE_EXTRA_TARGETS="scoop-tests"
   - bash .gitlab-ci.sh
  tags:
   - ubuntu
@@ -20,6 +21,7 @@ OSX-Subproject:
   - uname -a
   - module load Qt-5.9.1
   - export BUILD_GENERATOR="Ninja";
+  - export CMAKE_EXTRA_TARGETS="scoop-tests"
   - export CMAKE_OSX_ARCHITECTURES=x86_64
   - bash .gitlab-ci.sh
  tags:
@@ -31,6 +33,7 @@ Win7-Subproject:
   - call %ENVFILESDIR%\Boost-1.64-vs14-x64.bat
   - call %ENVFILESDIR%\Qt-5.9-vs14.bat
   - set BUILD_GENERATOR=Visual Studio 14 Win64
+  - set CMAKE_EXTRA_TARGETS=RUN_TESTS
   - set GENERATOR_EXTRA_OPTIONS=
   - '"c:\Program Files\Git\bin\bash.exe" --login  .gitlab-ci.sh'
   tags:
