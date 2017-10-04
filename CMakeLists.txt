@@ -27,7 +27,9 @@ endif( )
 option( SCOOP_WITH_EXAMPLES "SCOOP_WITH_EXAMPLES" ON )
 option( SCOOP_WITH_TESTS "SCOOP_WITH_TESTS" ON )
 
-set( SCOOP_DESCRIPTION "Scoop - ColoR pAleTtes and mappERs" )
+set( SCOOP_DESCRIPTION "Scoop - Simple ColoR pAleTtes and mappERs" )
+set( SCOOP_MANTAINER "Pablo Toharia <pablo.toharia@upm.es>" )
+set( SCOOP_LICENSE LGPL)
 set( COMMON_PROJECT_DOMAIN gmrv.es )
 
 
@@ -44,7 +46,7 @@ add_subdirectory( examples )
 add_subdirectory( tests )
 
 set( DOCS README.md LICENSE.txt )
-install( FILES ${DOCS} DESTINATION share/vmmlib COMPONENT dev )
+install( FILES ${DOCS} DESTINATION share/scoop COMPONENT dev )
 
 set( DOXYGEN_MAINPAGE_MD README.md )
 set( DOXYGEN_EXTRA_INPUT ${PROJECT_SOURCE_DIR}/README.md )
