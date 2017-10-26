@@ -19,9 +19,26 @@ scoop has been succesfully built and used on Ubuntu 14.04, Mac OSX
 Yosemite and Windows 7/8 Visual Studio 2013 Win64. The following steps should be
 enough to build it just with the required dependencies.
 
-```bash
+~~~~~~
 git clone --recursive https://gitlab.gmrv.es/gmrv/scoop.git
 mkdir scoop/build && cd scoop/build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make
-```
+~~~~~~
+
+
+## Testing
+
+After building scoop, you can run some examples in bin directory.
+For example, to manually run a simple test that cre
+ates a sequential
+color map, use the command:
+~~~~~~~~~~~~~
+./bin/scoopSequentialColorMap
+~~~~~~~~~~~~~
+
+## Documentation
+
+You can access the online API documentation generated from the source
+(using [Doxygen](http://doxygen.org/) ) in
+https://gmrvvis.github.io/doc/scoop/
