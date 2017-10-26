@@ -24,3 +24,4 @@ git clone --recursive https://gitlab.gmrv.es/gmrv/scoop.git
 mkdir scoop/build && cd scoop/build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make
+```
