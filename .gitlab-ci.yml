@@ -10,8 +10,27 @@ Ubuntu-Subproject:
   - export BUILD_GENERATOR="Ninja";
   - export CMAKE_EXTRA_TARGETS="scoop-tests"
   - bash .gitlab-ci.sh
+ except:
+    - master
  tags:
   - ubuntu
+
+
+Ubuntu-Subproject-master:
+ stage: build
+ script:
+  - date
+  - hostname
+  - uname -a
+  - export BUILD_GENERATOR="Ninja";
+  - export CMAKE_EXTRA_TARGETS="scoop-tests doxygen"
+  - export DEPLOY_DOC_REPO="git@github.com:gmrvvis/gmrvvis.github.io"
+  - bash .gitlab-ci.sh
+ only:
+    - master
+ tags:
+  - ubuntu
+
 
 OSX-Subproject:
  stage: build
