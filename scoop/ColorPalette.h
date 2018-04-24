@@ -61,6 +61,11 @@ namespace scoop
       Pastel2, Set1, Set2, Set3,
     } ColorBrewerQualitative;
 
+    typedef enum
+    {
+      Viridis, Magma, Inferno, Plasma
+    } MatplotlibPerceptualUniform;
+
     /**
      * Returns the container of colors of the palette
      *
@@ -122,6 +127,10 @@ namespace scoop
     SCOOP_API static ColorPalette colorBrewerQualitative(
       ColorBrewerQualitative cbPalette = ColorBrewerQualitative::Accent,
       unsigned int size = 3, bool reverse = false );
+
+    SCOOP_API static ColorPalette matplotlibPerceptualUniform(
+      MatplotlibPerceptualUniform mplPalette = MatplotlibPerceptualUniform::Viridis,
+      bool reverse = false );
 
     protected:
 
