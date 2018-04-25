@@ -25,17 +25,16 @@
 void printMapping( const scoop::SequentialColorMap& cm,
                    float min, float max, float incr )
 {
+  std::cout << "<div>" << std::endl;
   for ( float i = min ; i <= max; i += incr )
   {
     auto color = cm.getColor( i );
     int h,s,v;
     color.getHsv( &h, &s, &v );
-    std::cout << "#" << i << ":\t"
-              << color.red( ) << "\t" << color.green( ) << "\t"
-              << color.blue( ) << "\t" << color.alpha( )
-              << "\thsv(" << h << "," << s << "," << v << ")"
-              << std::endl;
+    std::cout << "<div style=\"width:5px; height: 30px; background: "
+              << color.name( ).toStdString( ) << "; float: left\"></div>" << std::endl;
   }
+  std::cout << "</div>" << std::endl;
 }
 
 int main ( void )
@@ -44,14 +43,16 @@ int main ( void )
   {
     scoop::SequentialColorMap cm( 0.0f, scoop::Color( 255, 0, 0 ),
                                   1.0f, scoop::Color( 0, 255, 0 ));
-    printMapping( cm, 0.0f, 1.1f, 0.1f );
-    std::cout << "-----------" << std::endl;
+
+    std::cout << "<div style=\"min-height:70px\"><div>Mapper based on RGB colors</div>" << std::endl;
+    printMapping( cm, 0.0f, 1.1f, 0.01f );
+    std::cout << "</div>" << std::endl;
 
     cm.addColor( 0.5f, scoop::Color( 0, 0, 255, 0 ));
-    printMapping( cm, 0.0f, 1.1f, 0.1f );
-    std::cout << "-----------" << std::endl;
+    std::cout << "<div style=\"min-height:70px\"><div>Mapper based on RGB colors adding one more color</div>" << std::endl;
+    printMapping( cm, 0.0f, 1.1f, 0.01f );
+    std::cout << "</div>" << std::endl;
   }
-
 
   // Setting up a mapper based on a palette
   {
@@ -59,8 +60,20 @@ int main ( void )
       scoop::ColorPalette::colorBrewerSequential(
         scoop::ColorPalette::ColorBrewerSequential::BuPu, 3 );
     scoop::SequentialColorMap cm( { 0.0f, 0.5f, 1.0f }, cp );
-    printMapping( cm, 0.0f, 1.1f, 0.1f );
-    std::cout << "-----------" << std::endl;
+    std::cout << "<div style=\"min-height:70px\"><div>Mapper based on a ColorBrewer palette</div>" << std::endl;
+    printMapping( cm, 0.0f, 1.1f, 0.01f );
+    std::cout << "</div>" << std::endl;
+  }
+
+  // Setting up a mapper based on a palette reversed
+  {
+    scoop::ColorPalette cp =
+      scoop::ColorPalette::colorBrewerSequential(
+        scoop::ColorPalette::ColorBrewerSequential::BuPu, 3, false );
+    scoop::SequentialColorMap cm( { 0.0f, 0.5f, 1.0f }, cp );
+    std::cout << "<div style=\"min-height:70px\"><div>Mapper based on a ColorBrewer palette reversed</div>" << std::endl;
+    printMapping( cm, 0.0f, 1.1f, 0.01f );
+    std::cout << "</div>" << std::endl;
   }
 
   // Setting up a mapper based on HSV colors
@@ -69,9 +82,29 @@ int main ( void )
     c1.setHsv( 180, 255, 255 );
     c2.setHsv( 180, 0, 0 );
     scoop::SequentialColorMap cm( 0.0f, c1, 1.0f, c2 );
-    printMapping( cm, 0.0f, 1.1f, 0.1f );
-    std::cout << "-----------" << std::endl;
-
+    std::cout << "<div style=\"min-height:70px\"><div>Mapper based on HSV colors</div>" << std::endl;
+    printMapping( cm, 0.0f, 1.1f, 0.01f );
+    std::cout << "</div>" << std::endl;
   }
+
+  // Setting up a mapper based on a matplotlib palette
+  std::cout << "<div style=\"min-height:70px\"><div>Mappers based on mpl palettes</div>" << std::endl;
+  for ( const auto& colorPalette :
+    { scoop::ColorPalette::MatplotlibPerceptualUniform::Viridis,
+        scoop::ColorPalette::MatplotlibPerceptualUniform::Magma,
+        scoop::ColorPalette::MatplotlibPerceptualUniform::Inferno,
+        scoop::ColorPalette::MatplotlibPerceptualUniform::Plasma } )
+  {
+    {
+      scoop::ColorPalette cp =
+        scoop::ColorPalette::matplotlibPerceptualUniform(
+          colorPalette, false);
+      scoop::SequentialColorMap cm( cp, 0.0f, 1.0f );
+      std::cout << "<div style=\"min-height:70px\">" << std::endl;
+      printMapping( cm, 0.0f, 1.1f, 0.01f );
+      std::cout << "</div>" << std::endl;
+    }
+  }
+  std::cout << "</div>" << std::endl;
   return 0;
 }

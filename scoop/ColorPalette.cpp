@@ -21,6 +21,7 @@
  */
 #include "ColorPalette.h"
 #include "ColorBrewerPalettes.h"
+#include "MatplotlibPalettes.h"
 #include <iostream>
 
 namespace scoop
@@ -56,6 +57,7 @@ namespace scoop
     {
       colors.push_back( Color( stringifiedPalette[size-3][i] ));
     }
+
     if ( reverse )
       std::reverse( colors.begin( ), colors.end( ));
 
@@ -100,6 +102,41 @@ namespace scoop
 
     if ( reverse )
       std::reverse( colors.begin( ), colors.end( ));
+
+    return palette;
+  }
+
+#define __CREATE_MPL_COLOR_VECTOR__( __NAME__ )                         \
+  for ( int i = ( reverse ? 255 : 0 );                         \
+        i != ( reverse ? -1 : 256 ); ( reverse ? --i : ++i ))            \
+    colors.emplace_back( Color::fromRgbF( __NAME__[i][0] , __NAME__[i][1], __NAME__[i][2] ));
+
+  ColorPalette ColorPalette::matplotlibPerceptualUniform(
+    MatplotlibPerceptualUniform mplPalette,
+    bool reverse )
+  {
+    ColorPalette palette;
+    auto& colors = palette.colors( );
+    colors.reserve( 256 );
+
+    switch ( mplPalette )
+    {
+    case MatplotlibPerceptualUniform::Viridis:
+      __CREATE_MPL_COLOR_VECTOR__( mplViridis );
+      break;
+    case MatplotlibPerceptualUniform::Magma:
+      __CREATE_MPL_COLOR_VECTOR__( mplMagma );
+      break;
+    case MatplotlibPerceptualUniform::Plasma:
+      __CREATE_MPL_COLOR_VECTOR__( mplPlasma );
+      break;
+    case MatplotlibPerceptualUniform::Inferno:
+      __CREATE_MPL_COLOR_VECTOR__( mplInferno );
+      break;
+    default:
+      throw std::runtime_error( "mpl color palette unknown" );
+    }
+
 
     return palette;
   }
