@@ -67,6 +67,12 @@ namespace scoop
     } MatplotlibPerceptualUniform;
 
     /**
+     * Constructor based on a container of colors
+     *
+     */
+    SCOOP_API ColorPalette( const Colors& c = {} );
+
+    /**
      * Returns the container of colors of the palette
      *
      * @returns a const reference to the container

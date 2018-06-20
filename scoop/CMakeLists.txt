@@ -1,6 +1,7 @@
 source_group(\\ FILES CMakeLists.txt)
 
 set(SCOOP_PUBLIC_HEADERS
+  BivariateSeqSeqColorMap.h
   Color.h
   ColorPalette.h
   CategoricalColorMap.hpp
@@ -11,6 +12,7 @@ set(SCOOP_HEADERS
 )
 
 set(SCOOP_SOURCES
+  BivariateSeqSeqColorMap.cpp
   Color.cpp
   ColorPalette.cpp
   SequentialColorMap.cpp

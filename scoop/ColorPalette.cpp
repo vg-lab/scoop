@@ -26,6 +26,11 @@
 
 namespace scoop
 {
+  ColorPalette::ColorPalette( const ColorPalette::Colors& c )
+    : _colors{ c }
+  {
+  }
+
   const ColorPalette::Colors& ColorPalette::colors( void ) const
   {
     return _colors;
