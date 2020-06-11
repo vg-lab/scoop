@@ -20,7 +20,7 @@ Yosemite and Windows 7/8 Visual Studio 2013 Win64. The following steps should be
 enough to build it just with the required dependencies.
 
 ~~~~~~
-git clone --recursive https://gitlab.gmrv.es/gmrv/scoop.git
+git clone --recursive https://github.com/vg-lab/scoop.git
 mkdir scoop/build && cd scoop/build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make
@@ -41,4 +41,4 @@ color map, use the command:
 
 You can access the online API documentation generated from the source
 (using [Doxygen](http://doxygen.org/) ) in
-https://gmrvvis.github.io/doc/scoop/
+https://vg-lab.github.io/doc/scoop/

@@ -30,7 +30,7 @@ option( SCOOP_WITH_TESTS "SCOOP_WITH_TESTS" ON )
 set( SCOOP_DESCRIPTION "Scoop - Simple ColoR pAleTtes and mappERs" )
 set( SCOOP_MANTAINER "Pablo Toharia <pablo.toharia@upm.es>" )
 set( SCOOP_LICENSE LGPL)
-set( COMMON_PROJECT_DOMAIN gmrv.es )
+set( COMMON_PROJECT_DOMAIN vglab.es )
 
 
 include( Common )
