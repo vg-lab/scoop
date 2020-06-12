@@ -24,8 +24,8 @@ Ubuntu-Subproject-master:
   - uname -a
   - export BUILD_GENERATOR="Ninja";
   - export CMAKE_EXTRA_TARGETS="scoop-tests doxygen"
-  - export DEPLOY_DOC_REPO="git@github.com:gmrvvis/gmrvvis.github.io"
-  - export GITHUB_MIRROR_URL="git@github.com:gmrvvis/scoop"
+  - export DEPLOY_DOC_REPO="git@github.com:vg-lab/vg-lab.github.io"
+  - export GITHUB_MIRROR_URL="git@github.com:vg-lab/scoop"
   - bash .gitlab-ci.sh
  only:
     - master
