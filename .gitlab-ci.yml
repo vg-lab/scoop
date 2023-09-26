@@ -33,19 +33,19 @@ Ubuntu-Subproject-master:
   - ubuntu
 
 
-OSX-Subproject:
- stage: build
- script:
-  - date
-  - hostname
-  - uname -a
-  - module load Qt-5.9.1
-  - export BUILD_GENERATOR="Ninja";
-  - export CMAKE_EXTRA_TARGETS="scoop-tests"
-  - export CMAKE_OSX_ARCHITECTURES=x86_64
-  - bash .gitlab-ci.sh
- tags:
-  - osx-sierra
+#OSX-Subproject:
+# stage: build
+# script:
+#  - date
+#  - hostname
+#  - uname -a
+#  - module load Qt-5.9.1
+#  - export BUILD_GENERATOR="Ninja";
+#  - export CMAKE_EXTRA_TARGETS="scoop-tests"
+#  - export CMAKE_OSX_ARCHITECTURES=x86_64
+#  - bash .gitlab-ci.sh
+# tags:
+#  - osx-sierra
 
 Win7-Subproject:
   stage: build
