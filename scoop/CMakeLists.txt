@@ -17,7 +17,7 @@ set(SCOOP_SOURCES
 )
 
 set(SCOOP_LINK_LIBRARIES
-  Qt5::Widgets
+  Qt6::Widgets
 
   )
 

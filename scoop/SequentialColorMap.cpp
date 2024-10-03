@@ -163,8 +163,8 @@ namespace scoop
                                                float normDist ) const
   {
 
-    double h1, s1, v1, a1;
-    double h2, s2, v2, a2;
+    float h1, s1, v1, a1;
+    float h2, s2, v2, a2;
     color1.getHsvF( &h1, &s1, &v1, &a1 );
     color2.getHsvF( &h2, &s2, &v2, &a2 );
 

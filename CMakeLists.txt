@@ -34,12 +34,12 @@ set( COMMON_PROJECT_DOMAIN vglab.es )
 
 
 include( Common )
-common_find_package( Qt5Gui SYSTEM REQUIRED )
-common_find_package( Qt5Widgets SYSTEM REQUIRED )
+common_find_package( Qt6Gui SYSTEM REQUIRED )
+common_find_package( Qt6Widgets SYSTEM REQUIRED )
 common_find_package( Boost COMPONENTS unit_test_framework )
 common_find_package_post( )
 
-set( SCOOP_DEPENDENT_LIBRARIES Qt5Widgets Qt5Gui )
+set( SCOOP_DEPENDENT_LIBRARIES Qt6Widgets Qt6Gui )
 
 add_subdirectory( scoop )
 add_subdirectory( examples )
