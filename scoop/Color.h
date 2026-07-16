@@ -24,7 +24,7 @@
 
 #include <QColor>
 #include <ostream>
-#include <scoop/api.h>
+#include <scoop/scoop_export.h>
 
 namespace scoop
 {
@@ -41,6 +41,6 @@ namespace scoop
  * @param[in] color : color to be dumped
    @return    copy of output stream after color is dumped
  */
-SCOOP_API std::ostream& operator<< ( std::ostream& os, const scoop::Color& color );
+SCOOP_EXPORT std::ostream& operator<< ( std::ostream& os, const scoop::Color& color );
 
 #endif

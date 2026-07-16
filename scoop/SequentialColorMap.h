@@ -24,7 +24,7 @@
 
 #include "Color.h"
 #include "ColorPalette.h"
-#include <scoop/api.h>
+#include <scoop/scoop_export.h>
 #include <vector>
 #include <map>
 
@@ -59,7 +59,7 @@ namespace scoop
      * @param[in] maxValue_: maximum key value
      * @param[in] maxColor: color associated to maximum key value
      */
-    SCOOP_API
+    SCOOP_EXPORT
     SequentialColorMap( float minValue_ = 0.f,
                         const Color& minColor = Color( 0, 0, 0 ),
                         float maxValue_ = 1.f,
@@ -74,7 +74,7 @@ namespace scoop
      * @param[in] values: container of values
      * @param[in] palette: palette to be used
      */
-    SCOOP_API
+    SCOOP_EXPORT
     SequentialColorMap( const std::vector< float >& values,
                         const ColorPalette& palette );
 
@@ -87,7 +87,7 @@ namespace scoop
      * @param[in] minValue: minimum key value
      * @param[in] maxValue: maximum key value
      */
-    SCOOP_API
+    SCOOP_EXPORT
     SequentialColorMap( const ColorPalette& palette,
                         float minValue = 0.f, float maxValue = 1.f );
 
@@ -100,7 +100,7 @@ namespace scoop
      * @param[in] values: container of values
      * @param[in] palette: palette to be used
      */
-    SCOOP_API void setFromPalette( const std::vector< float >& values,
+    SCOOP_EXPORT void setFromPalette( const std::vector< float >& values,
                                    const ColorPalette& palette );
 
      /**
@@ -108,14 +108,14 @@ namespace scoop
      *
      * @return maximum key value
      */
-    SCOOP_API float minValue( void ) const;
+    SCOOP_EXPORT float minValue( void ) const;
 
     /**
      * Returns the maximum key value
      *
      * @return maximum key value
      */
-    SCOOP_API float maxValue( void ) const;
+    SCOOP_EXPORT float maxValue( void ) const;
 
     /**
      * Adds a new key value and its associated color. If key valye exists
@@ -124,7 +124,7 @@ namespace scoop
      * @param[in] value: new key value
      * @param[in] color: color to be assoaciated to the key value
      */
-    SCOOP_API void addColor( const float value, const Color& color );
+    SCOOP_EXPORT void addColor( const float value, const Color& color );
 
     /**
      * Gets the color associated to a value. If the value has not been registered
@@ -136,7 +136,7 @@ namespace scoop
      *                           will be carried out
      * @return the color associated to the input value
      */
-    SCOOP_API Color getColor(
+    SCOOP_EXPORT Color getColor(
       const float value,
       const ColorInterpolation interpolation = RGB_INTERPOLATION ) const;
 

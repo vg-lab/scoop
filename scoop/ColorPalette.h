@@ -23,7 +23,7 @@
 #define __SCOOP__COLOR_PALETTE__
 
 #include "Color.h"
-#include <scoop/api.h>
+#include <scoop/scoop_export.h>
 #include <vector>
 
 namespace scoop
@@ -71,21 +71,21 @@ namespace scoop
      *
      * @returns a const reference to the container
     */
-    SCOOP_API const Colors& colors( void ) const;
+    SCOOP_EXPORT const Colors& colors( void ) const;
 
     /**
      * Returns the container of colors of the palette
      *
      * @returns a copy of the colors in the container
     */
-    SCOOP_API Colors& colors( void );
+    SCOOP_EXPORT Colors& colors( void );
 
     /**
      * Returns the size of the palette
      *
      * @returns the number of colors of the palette
     */
-    SCOOP_API unsigned int size( void ) const;
+    SCOOP_EXPORT unsigned int size( void ) const;
 
     /**
      * Static method to create a palette based on ColorBrewer's sequential
@@ -96,7 +96,7 @@ namespace scoop
      * @param[in] reverse: if the palette is created backwards
      * @returns the color palette
     */
-    SCOOP_API static ColorPalette colorBrewerSequential(
+    SCOOP_EXPORT static ColorPalette colorBrewerSequential(
       ColorBrewerSequential cbPalette = ColorBrewerSequential::BuGn,
       unsigned int size = 3, bool reverse = true );
 
@@ -109,7 +109,7 @@ namespace scoop
      * @param[in] reverse: if the palette is created backwards
      * @returns the color palette
     */
-    SCOOP_API static ColorPalette colorBrewerDiverging(
+    SCOOP_EXPORT static ColorPalette colorBrewerDiverging(
       ColorBrewerDiverging cbPalette = ColorBrewerDiverging::BrBG,
       unsigned int size = 3, bool reverse = true );
 
@@ -124,11 +124,11 @@ namespace scoop
      * @param[in] reverse: if the palette is created backwards
      * @returns the color palette
     */
-    SCOOP_API static ColorPalette colorBrewerQualitative(
+    SCOOP_EXPORT static ColorPalette colorBrewerQualitative(
       ColorBrewerQualitative cbPalette = ColorBrewerQualitative::Accent,
       unsigned int size = 3, bool reverse = false );
 
-    SCOOP_API static ColorPalette matplotlibPerceptualUniform(
+    SCOOP_EXPORT static ColorPalette matplotlibPerceptualUniform(
       MatplotlibPerceptualUniform mplPalette = MatplotlibPerceptualUniform::Viridis,
       bool reverse = false );
 

@@ -1,33 +1,67 @@
-if ( SCOOP_WITH_EXAMPLES )
+if(SCOOP_WITH_EXAMPLES)
 
-  include_directories(
-    ${PROJECT_SOURCE_DIR}
-    ${CMAKE_BINARY_DIR}/include
-    )
+  # Function to create and install an example application
+  function(add_project_example)
+    set(options)
+    set(oneValueArgs TARGET_NAME)
+    set(multiValueArgs SOURCES LINK_LIBRARIES)
+    cmake_parse_arguments(PARSE_ARGV 0 ARG "${options}" "${oneValueArgs}" "${multiValueArgs}")
 
-  add_compile_options(-fPIC)
+    if(NOT ARG_TARGET_NAME OR NOT ARG_SOURCES)
+      message(FATAL_ERROR "TARGET_NAME and SOURCES are required arguments")
+    endif()
 
-  set( SCOOPCATEGORICALCOLORMAP_HEADERS )
-  set( SCOOPCATEGORICALCOLORMAP_SOURCES CategoricalColorMap.cpp )
-  set( SCOOPCATEGORICALCOLORMAP_LINK_LIBRARIES scoop )
-  common_application( scoopCategoricalColorMap )
-  list( APPEND SCOOP_EXAMPLES_FILES ${SCOOPCATEGORICALCOLORMAP_SOURCES} )
+    add_executable(${ARG_TARGET_NAME} ${ARG_SOURCES})
+    target_link_libraries(${ARG_TARGET_NAME} PRIVATE ${PROJECT_NAME} ${ARG_LINK_LIBRARIES})
 
-  set( SCOOPSEQUENTIALCOLORMAP_HEADERS )
-  set( SCOOPSEQUENTIALCOLORMAP_SOURCES SequentialColorMap.cpp )
-  set( SCOOPSEQUENTIALCOLORMAP_LINK_LIBRARIES scoop )
-  common_application( scoopSequentialColorMap )
-  list( APPEND SCOOP_EXAMPLES_FILES ${SCOOPSEQUENTIALCOLORMAP_SOURCES} )
+    # Get current parent scope value and create a local copy
+    set(PROJECT_EXAMPLES_FILES_VAR "${${PROJECT_NAME}_EXAMPLES_FILES}")
+    set(current_examples ${PROJECT_EXAMPLES_FILES_VAR})
+    
+    # Convert to CMake list and append new sources
+    list(APPEND current_examples ${ARG_SOURCES})
+    
+    # Remove duplicates and update parent scope
+    list(REMOVE_DUPLICATES current_examples)
+    set(${PROJECT_NAME}_EXAMPLES_FILES "${current_examples}" PARENT_SCOPE)
 
+    # Create all examples target
+    if(NOT TARGET ${PROJECT_NAME}_all_examples)
+      add_custom_target(${PROJECT_NAME}_all_examples)
+    endif()
 
-  set( SCOOPCOLORPALETTE_HEADERS )
-  set( SCOOPCOLORPALETTE_SOURCES ColorPalette.cpp )
-  set( SCOOPCOLORPALETTE_LINK_LIBRARIES scoop )
-  common_application( scoopColorPalette )
-  list( APPEND SCOOP_EXAMPLES_FILES ${SCOOPCOLORPALETTE_SOURCES} )
+    # Add example to global examples target
+    add_dependencies(${PROJECT_NAME}_all_examples ${ARG_TARGET_NAME})
+  endfunction()
 
-  include(InstallFiles)
-  install_files(share/scoop/examples FILES ${SCOOP_EXAMPLES_FILES} COMPONENT
-    examples )
+  # scoopExampleCategoricalColorMap
+  add_project_example(
+    TARGET_NAME scoopExampleCategoricalColorMap
+    SOURCES 
+      CategoricalColorMap.cpp
+  )
 
-endif( SCOOP_WITH_EXAMPLES )
+  # scoopExampleSequentialColorMap
+  add_project_example(
+    TARGET_NAME scoopExampleSequentialColorMap
+    SOURCES 
+    SequentialColorMap.cpp
+  )
+
+  # scoopExampleColorPalette
+  add_project_example(
+    TARGET_NAME scoopExampleColorPalette
+    SOURCES 
+      ColorPalette.cpp
+  )
+
+  # Define installation directory variables
+  include(GNUInstallDirs)
+
+  # Install examples source files
+  install(FILES ${${PROJECT_NAME}_EXAMPLES_FILES}
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME_LOWER}/examples
+    COMPONENT ${PROJECT_NAME}_examples
+  )
+
+endif()
