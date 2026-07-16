@@ -7,4 +7,5 @@ doc/latex
 .*.swp
 #*
 *#*
-build
+/build
+/.cache
