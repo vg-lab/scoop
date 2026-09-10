@@ -1,62 +1,22 @@
-stages:
- - build
+stages: [run]
 
-Ubuntu-Subproject:
- stage: build
- script:
-  - date
-  - hostname
-  - uname -a
-  - export BUILD_GENERATOR="Ninja";
-  - export CMAKE_EXTRA_TARGETS="scoop-tests"
-  - bash .gitlab-ci.sh
- except:
-    - master
- tags:
-  - ubuntu
+include:
+  - component: $CI_SERVER_FQDN/common/ci-shared/cmake-workflow@main
+    inputs:
+      job_prefix: debug
+      image: "docker.io/ubuntu:24.04"
+      before_script:
+        - apt update
+        - DEBIAN_FRONTEND=noninteractive apt install -y git doxygen g++ cmake ninja-build libboost-test-dev qtbase5-dev
+      workflow_preset: "debug-test"
+      build_dir: "build/debug"
 
-
-Ubuntu-Subproject-master:
- stage: build
- script:
-  - date
-  - hostname
-  - uname -a
-  - export BUILD_GENERATOR="Ninja";
-  - export CMAKE_EXTRA_TARGETS="scoop-tests doxygen"
-  - export DEPLOY_DOC_REPO="git@github.com:vg-lab/vg-lab.github.io"
-  - export GITHUB_MIRROR_URL="git@github.com:vg-lab/scoop"
-  - bash .gitlab-ci.sh
- only:
-    - master
- tags:
-  - ubuntu
-
-
-#OSX-Subproject:
-# stage: build
-# script:
-#  - date
-#  - hostname
-#  - uname -a
-#  - module load Qt-5.9.1
-#  - export BUILD_GENERATOR="Ninja";
-#  - export CMAKE_EXTRA_TARGETS="scoop-tests"
-#  - export CMAKE_OSX_ARCHITECTURES=x86_64
-#  - bash .gitlab-ci.sh
-# tags:
-#  - osx-sierra
-
-Win7-Subproject:
-  stage: build
-  script:
-  - call %ENVFILESDIR%\Boost-1.64-vs14-x64.bat
-  - call %ENVFILESDIR%\Qt-5.9-vs14.bat
-  - set BUILD_GENERATOR=Visual Studio 14 Win64
-  - set CMAKE_EXTRA_TARGETS=RUN_TESTS
-  - set GENERATOR_EXTRA_OPTIONS=
-  - '"c:\Program Files\Git\bin\bash.exe" --login  .gitlab-ci.sh'
-  tags:
-  - win7
-  except:
-  - tags
+  - component: $CI_SERVER_FQDN/common/ci-shared/cmake-workflow@main
+    inputs:
+      job_prefix: debug-unstable
+      image: "docker.io/debian:unstable"
+      before_script:
+        - apt update
+        - DEBIAN_FRONTEND=noninteractive apt install -y git doxygen g++ cmake ninja-build libboost-test-dev qtbase5-dev
+      workflow_preset: "debug-test"
+      build_dir: "build/debug"
